@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, TextField, Container, Link } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, 
+    TextField, Container, Link, Snackbar } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './landing.css';
 import { useNavigate } from 'react-router-dom';
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
+
 
 const pricingPlans = [
   { id: 1, name: 'Basic', price: '32', features: [
@@ -49,7 +52,7 @@ const theme = createTheme({
         { question: "Is my data secure?", answer: "We ensure top-level security protocols to protect your data." }
     ];
     return (
-        <Container minWidth="md" sx={{ mt: 20}}>
+        <Container width="md" sx={{ mt: 20}}>
             <Typography variant="h4" sx={{ mb: 5, fontSize: 32, textAlign: 'center'}}>Frequently Asked Questions</Typography>
                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 {faqs.map((faq, index) => (
@@ -68,7 +71,46 @@ const theme = createTheme({
       );
     }
     
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 function ContactUs() {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: ''
+      });
+      const [openSnackbar, setOpenSnackbar] = useState(false);
+    
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        console.log(name, value);
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
+    
+      const handleSubmit = () => {
+        if (!formData.firstName == '' || !formData.lastName == '' || !formData.email == '' || !formData.message == '' && formData.email.includes('@')) {
+            console.log(formData);
+            setOpenSnackbar(true);
+            setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            message: ''
+            });
+        };
+      };
+    
+      const handleCloseSnackbar =(reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenSnackbar(false);
+      };
     return (
         <Container id="contact-us" width="xl" sx={{mt: 18, mb: 8,bgcolor: '#E0E0FF', p: 10, boxShadow: 1}}>
             <Container sx={{bgcolor:'#9A97FF', display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: '20px', p: 4, padding: '20px', width: '90%'}}>
@@ -78,20 +120,23 @@ function ContactUs() {
             </Typography>
             </Box>
             <Box component="form" sx={{width: 600, display: 'flex', flexDirection: 'column', gap: 1, marginLeft: '180px', padding: '20px'}}>
-                <TextField fullWidth label="First Name" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'}}} placeholder="John" 
+                <TextField fullWidth label="First Name" name='firstName' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'}}} placeholder="John" 
                 InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
-                    padding: '0px 0px 4px 18px'}}}/>
-                <TextField fullWidth  label="Last Name" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="Doe" 
+                    padding: '0px 0px 4px 18px'}}} value={formData.firstName} onChange={handleChange}/>
+                <TextField fullWidth  label="Last Name" name ='lastName' variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="Doe" 
                 InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
-                    padding: '0px 0px 4px 18px' }}}/>
-                <TextField fullWidth label="Email" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="john@email.com" 
+                    padding: '0px 0px 4px 18px' }}} value={formData.lastName} onChange={handleChange}/>
+                <TextField fullWidth label="Email" name='email' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="john@email.com" 
                 InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/email.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
-                    padding: '0px 0px 4px 18px' }}}/>
-                <TextField fullWidth label="Message" multiline rows={4} variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} 
+                    padding: '0px 0px 4px 18px' }}} value={formData.email} onChange={handleChange}/>
+                <TextField fullWidth label="Message" multiline rows={4} name='message' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} 
                 placeholder="type your message here ...." InputProps={{ style: { backgroundColor: 'white', fontSize: '13px', fontStyle: 'italic', backgroundImage: 'url("/message.png")', 
-                    backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px top 23px',padding: '20px 20px 20px 32px' }}}/>
+                    backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px top 23px',padding: '20px 20px 20px 32px' }}} value={formData.message} onChange={handleChange}/>
                 <Button variant="contained" theme={theme} color= 'backgroundColor' sx={{ mt: 1, borderRadius: '10px',  height: 40, width: 240, 
-                    textTransform: 'none', alignSelf: 'center'}}>Send</Button>
+                    textTransform: 'none', alignSelf: 'center'}} onClick={() => handleSubmit()}>Send</Button>
+                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
+                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>Message delivered successfully!</Alert>
+                </Snackbar>
             </Box>
             </Container>
         </Container>
@@ -101,7 +146,7 @@ function ContactUs() {
 
 function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
   return (
-    <Card id="pricing-section" className="pricing-card" sx={{ minWidth: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
+    <Card id="pricing-section" className="pricing-card" sx={{ width: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',marginLeft: '5px', marginTop: '30px', 
         transform: isActive ? 'scale(1.15)' : 'scale(1)', zIndex: isActive ? 1 : 0}}
     onMouseEnter={() => onMouseEnter(plan.id)}
