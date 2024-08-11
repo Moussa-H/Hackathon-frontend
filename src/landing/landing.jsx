@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia} from '@mui/material';
+import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, TextField, Container } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './landing.css';
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -35,6 +36,68 @@ const theme = createTheme({
     },
   });
 
+  function FAQAndContact() {
+    const faqs = [
+        { question: "What does AppRicot do ?", answer: "AppRicot provides analytics tools for app developers." },
+        { question: "How often is the data updated?", answer: "Data is updated every 24 hours." },
+        { question: "Do I need technical skills to use AppRicot?", answer: "Basic technical skills are helpful but not required." },
+        { question: "Can I customize the dashboard?", answer: "Yes, the dashboard is fully customizable." },
+        { question: "How do I get started?", answer: "Sign up for an account and follow the onboarding process." },
+        { question: "How accurate are the predictions?", answer: "Our predictions are highly accurate with precision metrics." },
+        { question: "Can I compare my app with competitors?", answer: "Yes, our tools allow for competitive analysis." },
+        { question: "Is my data secure?", answer: "We ensure top-level security protocols to protect your data." }
+    ];
+    return (
+        <Container minWidth="md" sx={{ mt: 20}}>
+            <Typography variant="h4" sx={{ mb: 5, fontSize: 32, textAlign: 'center'}}>Frequently Asked Questions</Typography>
+                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                {faqs.map((faq, index) => (
+                    <Accordion key={index} sx={{ width: '48%', mb: 3, backgroundColor: '#ffffff', boxShadow: 'none', border: '1px solid #605BFF', borderRadius: '20px', 
+                    '&:before': { display: 'none' } }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 56 }}>
+                            <Typography sx={{ fontWeight: 'medium', fontSize: 16 }}>{faq.question}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>{faq.answer}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </div>
+        </Container>
+      );
+    }
+    
+function ContactUs() {
+    return (
+        <Container width="xl" sx={{mt: 18, mb: 8,bgcolor: '#E0E0FF', p: 10, boxShadow: 1}}>
+            <Container sx={{bgcolor:'#9A97FF', display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: '20px', p: 4, padding: '20px', width: '90%'}}>
+            <Box sx={{ textAlign: 'center', mb: 6, marginLeft: '100px'}}>
+            <Typography sx={{ mb: 4, fontWeight: 'bold', textAlign: 'center', width: '90%', fontSize: 32}}>Contact Us</Typography>
+            <Typography>Have a question about how our tools work? <br></br>Do you perhaps have some feedback <br></br> you’d like us to know?
+            </Typography>
+            </Box>
+            <Box component="form" sx={{width: 600, display: 'flex', flexDirection: 'column', gap: 1, marginLeft: '180px', padding: '20px'}}>
+                <TextField fullWidth label="First Name" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'}}} placeholder="John" 
+                InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
+                    padding: '0px 0px 4px 18px'}}}/>
+                <TextField fullWidth  label="Last Name" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="Doe" 
+                InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
+                    padding: '0px 0px 4px 18px' }}}/>
+                <TextField fullWidth label="Email" variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="john@email.com" 
+                InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/email.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
+                    padding: '0px 0px 4px 18px' }}}/>
+                <TextField fullWidth label="Message" multiline rows={4} variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} 
+                placeholder="type your message here ...." InputProps={{ style: { backgroundColor: 'white', fontSize: '13px', fontStyle: 'italic', backgroundImage: 'url("/message.png")', 
+                    backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px top 23px',padding: '20px 20px 20px 32px' }}}/>
+                <Button variant="contained" theme={theme} color= 'backgroundColor' sx={{ mt: 1, borderRadius: '10px',  height: 40, width: 240, 
+                    textTransform: 'none', alignSelf: 'center'}}>Send</Button>
+            </Box>
+            </Container>
+        </Container>
+    );
+}
+
+
 function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
   return (
     <Card className="pricing-card" sx={{ minWidth: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
@@ -68,10 +131,7 @@ function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
           ))}
         </ul>
         <Button theme={theme} color = 'backgroundColor' variant="contained" sx={{ textTransform: 'none', marginTop: '30px', 
-            width: '50%', borderRadius: '13px', height: '50px', fontSize: '16px','&:hover': {
-      backgroundColor: '#fff',
-      color: '#605BFF',//'#3c52b2',
-  } }}>Buy Now</Button>
+            width: '50%', borderRadius: '13px', height: '50px', fontSize: '16px','&:hover': { backgroundColor: '#9A97FF'} }}>Buy Now</Button>
       </CardContent>
     </Card>
   );
@@ -89,10 +149,16 @@ function Landing() {
   };
   return (
     <ThemeProvider theme={landingPageTheme}>
-        <h1>Pricing</h1>
+        <p>Pricing</p>
         <div className="pricing-section">
         {pricingPlans.map(plan => <PricingCard key={plan.id} plan={plan} isActive={plan.id === activeCard}
          onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>)}
+        </div>
+        <div>
+            <FAQAndContact />
+        </div>
+        <div>
+            <ContactUs />
         </div>
     </ThemeProvider>
   );
