@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-
 .landing-page-container {
     width: 100%;
-    min-height: 100vh; 
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     background: #dfdeff; 
     padding-top: 40px;
+    box-sizing: border-box; 
 }
-
 
 .hero-section {
     display: flex;
@@ -18,10 +17,10 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 160px 20px;
+    padding: 160px 0px;
     text-align: center;
+    box-sizing: border-box;
 }
-
 
 .hero-logo img {
     max-width: 200px;
@@ -29,13 +28,12 @@
     margin-bottom: 30px;
 }
 
-
 .app-ricot {
     font-family: 'Poppins', sans-serif;
     font-size: 64px;
     font-weight: 600;
     line-height: 96px;
-    color: #000000; 
+    color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +41,6 @@
     height: 96px;
     margin-bottom: 20px;
 }
-
 
 .special-o {
     color: #0000FF;
@@ -53,71 +50,201 @@
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
     line-height: 40px;
-    color: #000000; 
+    color: #000000;
     max-width: 1030px;
     margin-top: 20px;
     text-align: center;
 }
-
 
 .mission {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 150px;
+    margin-top: 1px;
+    box-sizing: border-box;
 }
-
 
 .mission-text h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 50px;
     font-weight: 400;
     line-height: 75px;
-    color: #000000; 
+    color: #000000;
     text-align: left;
     width: 440px;
     height: 91px;
     margin-bottom: 10px;
+    opacity: 1;
 }
-
 
 .mission-text p {
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 45px;
-    color: #000000; 
+    color: #000000;
     text-align: left;
     width: 672px;
-}
-.mission-text {
-    margin-left: 50px; 
+    opacity: 1;
 }
 
+.mission-text {
+    margin-left: 50px;
+}
 
 .mission-image {
-    width: 100%; 
-    max-width: 600px; 
-    height: auto; 
+    width: 100%;
+    max-width: 600px;
+    height: auto;
     border-radius: 15.54px 0px 0px 0px;
     opacity: 1;
 }
 
+.features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 200px;
+}
+
+.features h2 {
+    font-size: 40px;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 30px;
+    flex-direction: row;
+}
+
+.feature-item:first-child, .feature-item:nth-child(3) {
+    flex-direction: row-reverse;
+}
+
+.feature-item img {
+    width: 450px;
+    height: auto;
+    margin: 0 0px;
+}
+
+.feature-item:first-child img, .feature-item:nth-child(3) img {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.feature-item:nth-child(2) img {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.feature-item div {
+    width: 50%;
+    text-align: left;
+}
+
+.feature-item h3, .feature-item p {
+    color: #000000;
+}
+
+.feature-item h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 22px;
+    font-weight: 400;
+    width: 600px;
+    margin-bottom: 20px;
+}
+
+.trusted-by {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.trusted-by h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.trusted-by-logos {
+    width: 100%;
+    overflow: hidden; /* Hides anything outside this container */
+    position: relative;
+}
+
+.logo-slider {
+    display: flex;
+    animation: scrollLogos 10s linear infinite;
+    gap: 10px;
+}
+
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Moves the logos continuously */
+    }
+}
+
+.logo-item img {
+    width: 100px;
+    height: auto;
+}
 
 @media (max-width: 768px) {
+    .landing-page-container, .mission, .features, .trusted-by {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
     .mission {
         flex-direction: column;
-    }
-
-    .mission-text h2, .mission-text p {
-        text-align: center;
-        width: auto; 
-    }
-
-    .mission-image {
-        width: 100%; 
-        height: auto; 
         margin-top: 20px;
+    }
+
+    .mission-text {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .features {
+        padding: 10px 0;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .feature-item img {
+        width: 100%;
+        
+    }
+
+    .feature-item h3, .feature-item p {
+        width: 90%;
+    }
+    
+    .logo-slider {
+        justify-content: center;
     }
 }
