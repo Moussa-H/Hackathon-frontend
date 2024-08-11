@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, TextField, Container } from '@mui/material';
+import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, TextField, Container, Link } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './landing.css';
+import { useNavigate } from 'react-router-dom';
 const { palette } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
@@ -58,7 +59,7 @@ const theme = createTheme({
                             <Typography sx={{ fontWeight: 'medium', fontSize: 16 }}>{faq.question}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography>{faq.answer}</Typography>
+                            <Typography sx={{textAlign: 'left'}}>{faq.answer}</Typography>
               </AccordionDetails>
             </Accordion>
           ))}
@@ -69,7 +70,7 @@ const theme = createTheme({
     
 function ContactUs() {
     return (
-        <Container width="xl" sx={{mt: 18, mb: 8,bgcolor: '#E0E0FF', p: 10, boxShadow: 1}}>
+        <Container id="contact-us" width="xl" sx={{mt: 18, mb: 8,bgcolor: '#E0E0FF', p: 10, boxShadow: 1}}>
             <Container sx={{bgcolor:'#9A97FF', display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: '20px', p: 4, padding: '20px', width: '90%'}}>
             <Box sx={{ textAlign: 'center', mb: 6, marginLeft: '100px'}}>
             <Typography sx={{ mb: 4, fontWeight: 'bold', textAlign: 'center', width: '90%', fontSize: 32}}>Contact Us</Typography>
@@ -100,7 +101,7 @@ function ContactUs() {
 
 function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
   return (
-    <Card className="pricing-card" sx={{ minWidth: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
+    <Card id="pricing-section" className="pricing-card" sx={{ minWidth: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',marginLeft: '5px', marginTop: '30px', 
         transform: isActive ? 'scale(1.15)' : 'scale(1)', zIndex: isActive ? 1 : 0}}
     onMouseEnter={() => onMouseEnter(plan.id)}
@@ -137,6 +138,38 @@ function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
   );
 }
 
+function Footer() {
+    const navigate=useNavigate();
+    return (
+        <Box sx={{ width: '100%', padding: '20px 0', marginTop: '100px' }}>
+            <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', gap: '70px', marginBottom: '50px' }}>
+                <Box>
+                    <Link href="#" sx={{ marginRight: 20, color: 'grey', textDecoration: 'none' }}>About Us</Link>
+                    <Link href="#pricing-section" sx={{ marginRight: 20, color: 'grey', textDecoration: 'none' }}>Pricing</Link>
+                    <Button  sx={{ textTransform: 'none', color: 'grey', font:'poppins', fontSize: '17px', marginRight: 20}} onClick={() => navigate('/login')}>Login</Button>
+                    <Link href="#" sx={{ marginRight: 20, color: 'grey', textDecoration: 'none' }}>Features</Link>
+                    <Link href="#contact-us" sx={{ color: 'grey', textDecoration: 'none'}}>Contact Us</Link>
+                </Box>
+                <Container sx={{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row'}}>
+                <Box sx={{ textAlign: 'center' }}>
+                    <img src="/logo.png" style={{ width: 200,height: 170 }} />
+                </Box>
+                
+                <Box sx={{ textAlign: 'center' }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 26, marginBottom: 3 }}>Connect with us</Typography>
+                    <Box>
+                        <Link href="https://youtube.com"><img src="/youtube.png" style={{ width: 43, marginRight: 20 }} /></Link>
+                        <Link href="https://instagram.com"><img src="/instagram.png" style={{ width: 39, marginRight: 20 }} /></Link>
+                        <Link href="https://facebook.com"><img src="/facebook.png"style={{ width: 39, marginRight: 20 }} /></Link>
+                        <Link href="https://linkedin.com"><img src="/linkedin.png" style={{ width: 39 }} /></Link>
+                    </Box>
+                    <Typography variant="body2" sx={{ marginTop: 3, fontSize:10, fontWeight: 'bold' }}>&copy; 2024 App Ricot system - All Rights Reserved</Typography>
+                </Box>
+                </Container>
+            </Container>
+        </Box>
+    );
+}
 function Landing() {
  const [activeCard, setActiveCard] = useState(2);  
 
@@ -159,6 +192,9 @@ function Landing() {
         </div>
         <div>
             <ContactUs />
+        </div>
+        <div>
+            <Footer />
         </div>
     </ThemeProvider>
   );
