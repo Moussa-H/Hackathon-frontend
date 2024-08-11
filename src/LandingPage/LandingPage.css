@@ -1,104 +1,123 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+
 .landing-page-container {
     width: 100%;
     min-height: 100vh; 
+    display: flex;
     flex-direction: column;
     align-items: center;
     background: #dfdeff; 
-    padding-top: 40px; 
+    padding-top: 40px;
 }
 
 
 .hero-section {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    width: 100%; 
-    padding: 60px 20px; 
-    text-align: center; 
-}
-
-.hero-logo {
-    width: 100%; 
-    display: flex;
-    justify-content: center; 
-    margin-bottom: 30px; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 160px 20px;
+    text-align: center;
 }
 
 
 .hero-logo img {
-    max-width: 200px; 
-    height: auto; 
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 30px;
 }
 
 
 .app-ricot {
-    width: 311px; 
-    height: 96px; 
-    font-family: 'Poppins', sans-serif; 
-    font-size: 64px; 
-    font-weight: 600; 
-    line-height: 96px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 96px;
     color: #000000; 
-    text-align: left;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 0px; 
-    opacity: 1; 
-    margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 311px;
+    height: 96px;
+    margin-bottom: 20px;
 }
 
 
 .special-o {
-    color: #0000FF; 
+    color: #0000FF;
 }
-
-
-.hero-content {
-    width: 1048px; 
-    height: 135px; 
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center; 
-    gap: 0px; 
-    opacity: 1; 
-}
-
 
 .hero-content p {
-    font-family: 'Poppins', sans-serif; 
-    font-size: 18px; 
-    line-height: 24px; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    line-height: 40px;
     color: #000000; 
+    max-width: 1030px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.mission {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 150px;
+}
+
+
+.mission-text h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 75px;
+    color: #000000; 
+    text-align: left;
+    width: 440px;
+    height: 91px;
+    margin-bottom: 10px;
+}
+
+
+.mission-text p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 45px;
+    color: #000000; 
+    text-align: left;
+    width: 672px;
+}
+.mission-text {
+    margin-left: 50px; 
+}
+
+
+.mission-image {
+    width: 100%; 
     max-width: 600px; 
-    text-align: center; 
-    margin-top: 20px; 
+    height: auto; 
+    border-radius: 15.54px 0px 0px 0px;
+    opacity: 1;
 }
 
 
 @media (max-width: 768px) {
-    .logo img {
-        height: 50px; 
+    .mission {
+        flex-direction: column;
     }
 
-    .hero-logo img {
-        max-width: 180px;
+    .mission-text h2, .mission-text p {
+        text-align: center;
+        width: auto; 
     }
 
-    .app-ricot {
-        width: 100%; 
-        font-size: 48px; 
-        line-height: 72px; 
-        text-align: center; 
-    }
-
-    .hero-content {
+    .mission-image {
         width: 100%; 
         height: auto; 
-        padding: 20px; 
+        margin-top: 20px;
     }
 }
