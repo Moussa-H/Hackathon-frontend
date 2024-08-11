@@ -9,7 +9,16 @@
   background: #fff;
   border-radius: 10px;
 }
-
+.error-message {
+    display: flex;
+    align-items: center;
+    color: red;
+    font-size: 11px;
+}
+.error-icon {
+  margin-right: 8px;
+  font-size: 1.5em;
+}
 .form-container {
   width: 30%;
   padding: 20px;
