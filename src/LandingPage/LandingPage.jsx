@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '../component/Navbar/NavBar'; 
 import './LandingPage.css';
 import hero from '../Images/hero-logo.png';
@@ -21,9 +21,26 @@ import trustedLogo12 from '../Images/logo-item12.png';
 import trustedLogo13 from '../Images/logo-item13.png';
 import trustedLogo14 from '../Images/logo-item14.png';
 import trustedLogo15 from '../Images/logo-item15.png';
-import trustedLogo16 from '../Images/logo-item16.png';
+
 
 function LandingPage() {
+    const logos = [
+        trustedLogo1, trustedLogo2, trustedLogo3, trustedLogo4,
+        trustedLogo5, trustedLogo6, trustedLogo7, trustedLogo8,
+        trustedLogo9, trustedLogo10, trustedLogo11, trustedLogo12,
+        trustedLogo13, trustedLogo14, trustedLogo15, 
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlePrevClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + logos.length) % logos.length);
+    };
+
+    const handleNextClick = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % logos.length);
+    };
+    
     return (
         <div className="landing-page-container">
             <NavBar />
@@ -79,23 +96,14 @@ function LandingPage() {
             </section>
             <section className="trusted-by">
                 <h2>Our Platform is Trusted By</h2>
-                <div className="logo-slider">
-                    <div className="logo-item"><img src={trustedLogo1} alt="Client 1" /></div>
-                    <div className="logo-item"><img src={trustedLogo2} alt="Client 2" /></div>
-                    <div className="logo-item"><img src={trustedLogo3} alt="Client 3" /></div>
-                    <div className="logo-item"><img src={trustedLogo4} alt="Client 4" /></div>
-                    <div className="logo-item"><img src={trustedLogo5} alt="Client 5" /></div>
-                    <div className="logo-item"><img src={trustedLogo6} alt="Client 6" /></div>
-                    <div className="logo-item"><img src={trustedLogo7} alt="Client 7" /></div>
-                    <div className="logo-item"><img src={trustedLogo8} alt="Client 8" /></div>
-                    <div className="logo-item"><img src={trustedLogo9} alt="Client 9" /></div>
-                    <div className="logo-item"><img src={trustedLogo10} alt="Client 10" /></div>
-                    <div className="logo-item"><img src={trustedLogo11} alt="Client 11" /></div>
-                    <div className="logo-item"><img src={trustedLogo12} alt="Client 12" /></div>
-                    <div className="logo-item"><img src={trustedLogo13} alt="Client 13" /></div>
-                    <div className="logo-item"><img src={trustedLogo14} alt="Client 14" /></div>
-                    <div className="logo-item"><img src={trustedLogo15} alt="Client 15" /></div>
-                    <div className="logo-item"><img src={trustedLogo16} alt="Client 16" /></div>
+                <div className="trusted-by-logos">
+                    <button className="nav-arrow left" onClick={handlePrevClick}>❮</button>
+                    <div className="logo-slider">
+                        {logos.slice(currentIndex, currentIndex + 5).map((logo, index) => (
+                            <div className="logo-item" key={index}><img src={logo} alt={`Client ${index + 1}`} /></div>
+                        ))}
+                    </div>
+                    <button className="nav-arrow right" onClick={handleNextClick}>❯</button>
                 </div>
             </section>
         </div>
