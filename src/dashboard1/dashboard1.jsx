@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TablePagination } from '@mui/material';
 import NavbarDashboard from '../component/NavbarDashboard';
 import Sidebar from '../component/Sidebar';
-import { Margin } from '@mui/icons-material';
 
 const Dash = () => {
     const [allApps, setAllApps] = useState([]);
