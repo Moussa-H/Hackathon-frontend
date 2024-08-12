@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import React, { useState } from 'react';
 import NavBar from '../component/Navbar/NavBar'; 
 import './LandingPage.css';
 import hero from '../Images/hero-logo.png';
@@ -317,6 +318,14 @@ function LandingPage() {
             </section>
             <section className="trusted-by">
                 <h2>Our Platform is Trusted By</h2>
+                <div className="trusted-by-logos">
+                    <button className="nav-arrow left" onClick={handlePrevClick}>❮</button>
+                    <div className="logo-slider">
+                        {logos.slice(currentIndex, currentIndex + 5).map((logo, index) => (
+                            <div className="logo-item" key={index}><img src={logo} alt={`Client ${index + 1}`} /></div>
+                        ))}
+                    </div>
+                    <button className="nav-arrow right" onClick={handleNextClick}>❯</button>
                 <div className="trusted-by-logos">
                     <button className="nav-arrow left" onClick={handlePrevClick}>❮</button>
                     <div className="logo-slider">
