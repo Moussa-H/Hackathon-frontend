@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import loginImage from "../Images/cuate2.png";
 import emailIcon from "../Images/Email.svg";
@@ -14,6 +14,7 @@ function Login() {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -27,14 +28,25 @@ function Login() {
         email: formData.email,
         password: formData.password,
       });
-      if (response.data.message !== "success") {
+
+      if (response.data.message === "success") {
+        // Extract token and user data
+        const { token, user } = response.data;
+
+        // Save token and user data to local storage
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", user.fname);
+
+        // Redirect to dashboard
+        navigate("/dashboard"); // Redirect to /dashboard
+      } else {
         setErrorMessage(
           "An error occurred while logging in. Please try again."
         );
       }
-      console.log(response.data);
     } catch (error) {
       console.error("There was an error logging in the user!", error);
+      setErrorMessage("An error occurred while logging in. Please try again.");
     }
   };
 

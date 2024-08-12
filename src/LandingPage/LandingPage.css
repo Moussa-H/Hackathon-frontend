@@ -184,30 +184,50 @@
 }
 
 .trusted-by-logos {
-    width: 100%;
-    overflow: hidden; /* Hides anything outside this container */
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    box-sizing: border-box;
 }
 
 .logo-slider {
     display: flex;
-    animation: scrollLogos 10s linear infinite;
-    gap: 10px;
-}
-
-@keyframes scrollLogos {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%); /* Moves the logos continuously */
-    }
+    gap: 30px;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
 }
 
 .logo-item img {
     width: 100px;
     height: auto;
 }
+
+.nav-arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000000;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.nav-arrow.left {
+    left: 0;
+}
+
+.nav-arrow.right {
+    right: 0;
+}
+
 
 @media (max-width: 768px) {
     .landing-page-container, .mission, .features, .trusted-by {
