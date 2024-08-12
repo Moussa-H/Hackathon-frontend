@@ -27,7 +27,7 @@ const Sidebar = () => {
       }}
     >
       <List>
-        <ListItem button component={Link} to="prediction-analysis">
+        <ListItem button component={Link} to="">
           <ListItemIcon>
             <img
               src={PredictionIcon}
@@ -37,7 +37,7 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Prediction Analysis" />
         </ListItem>
-        <ListItem button component={Link} to="competitor-analysis">
+        <ListItem button component={Link} to="/dash">
           <ListItemIcon>
             <img
               src={AnalysisIcon}
@@ -45,7 +45,7 @@ const Sidebar = () => {
               style={{ width: 24, height: 24 }}
             />
           </ListItemIcon>
-          <ListItemText primary="Competitor Analysis" />
+          <ListItemText primary="Competitor Analysis" component={Link} to="/dash" />
         </ListItem>
         <ListItem button component={Link} to="my-project">
           <ListItemIcon>
