@@ -35,8 +35,7 @@ const PopupGenerate = ({ open, handleClose }) => {
   const [releaseDate, setReleaseDate] = useState("");
   const [androidVer, setAndroidVer] = useState("");
 
-const navigate=useNavigate();
-
+  const navigate = useNavigate();
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -56,50 +55,55 @@ const navigate=useNavigate();
     });
   };
 
-  const handleSubmit = async () => {
-    const [year, month] = releaseDate.split("-").map(Number);
+const handleSubmit = async () => {
+  const [year, month] = releaseDate.split("-").map(Number);
 
-    const data = {
-      appName: name, // Include application name
-      androidVer: androidVer || "900", // Default to "900" if empty
-      size: parseFloat(applicationSize) || 0, // Default to 0 if empty
-      price: price === "Free" ? 0 : parseFloat(customPrice) || 1,
-      categoryEncoded: 1, // Make sure this value is correct
-      typeFree: price === "Free" ? 1 : 0,
-      typePaid: price === "Paid" ? 1 : 0,
-      contentRatingsAdultsOnly18: contentRatings.AdultsOnly ? 1 : 0,
-      contentRatingsEveryone: contentRatings.Everyone ? 1 : 0,
-      contentRatingsEveryone10: 0, // If this field is not used, ensure it's handled correctly
-      contentRatingsMature17: contentRatings.Mature ? 1 : 0,
-      contentRatingsTeen: contentRatings.Teen ? 1 : 0,
-      contentRatingsUnrated: contentRatings.Unrated ? 1 : 0,
-      lastUpdatedYear: year,
-      lastUpdatedMonth: month,
-    };
-
-    const token = localStorage.getItem("token");
-    console.log(data);
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/aiRequest/createRequest",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("Response:", response.data);
-navigate("/detailapppredict", { state: { data: response.data } });
-
-// Close the popup
-handleClose();
-      // Handle success
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      // Handle error
-    }
+  const data = {
+    appName: name, // Ensure this is properly set
+    androidVer: androidVer || "900", // Default to "900" if empty
+    size: parseFloat(applicationSize) || 0, // Default to 0 if empty
+    price: price === "Free" ? 0 : parseFloat(customPrice) || 1,
+    category: category, // Make sure this is set correctly
+    typeFree: price === "Free" ? 1 : 0,
+    typePaid: price === "Paid" ? 1 : 0,
+    contentRatingsAdultsOnly18: contentRatings.AdultsOnly ? 1 : 0,
+    contentRatingsEveryone: contentRatings.Everyone ? 1 : 0,
+    contentRatingsEveryone10: contentRatings.Everyone ? 1 : 0, // Adjust as necessary
+    contentRatingsMature17: contentRatings.Mature ? 1 : 0,
+    contentRatingsTeen: contentRatings.Teen ? 1 : 0,
+    contentRatingsUnrated: contentRatings.Unrated ? 1 : 0,
+    lastUpdatedYear: year,
+    lastUpdatedMonth: month,
   };
+
+  const token = localStorage.getItem("token");
+  console.log(data);
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/aiRequest/createRequest",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("Response:", response.data);
+
+    // Navigate to the DetailAppPredict component with response data
+    navigate("/detailapppredict", { state: { data: response.data } });
+  } catch (error) {
+    console.error(
+      "Error response:",
+      error.response?.data || "No response data"
+    );
+    console.error("Error message:", error.message || "No error message");
+    // Optionally show user-friendly error message
+  }
+};
+
+
+
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
@@ -285,89 +289,118 @@ handleClose();
                 },
               }}
             >
-              <MenuItem value="Art & Design">Art & Design</MenuItem>
-              <MenuItem value="Auto & Vehicles">Auto & Vehicles</MenuItem>
-              <MenuItem value="Beauty">Beauty</MenuItem>
-              <MenuItem value="Comics">Comics</MenuItem>
-              <MenuItem value="Dating">Dating</MenuItem>
-              <MenuItem value="Education">Education</MenuItem>
-              <MenuItem value="Entertainment">Entertainment</MenuItem>
-              <MenuItem value="Finance">Finance</MenuItem>
-              <MenuItem value="Food & Drink">Food & Drink</MenuItem>
-              <MenuItem value="Health & Fitness">Health & Fitness</MenuItem>
-              <MenuItem value="House & Home">House & Home</MenuItem>
-              <MenuItem value="Libraries & Demo">Libraries & Demo</MenuItem>
-              <MenuItem value="Lifestyle">Lifestyle</MenuItem>
-              <MenuItem value="Maps & Navigation">Maps & Navigation</MenuItem>
-              <MenuItem value="Medical">Medical</MenuItem>
-              <MenuItem value="Music & Audio">Music & Audio</MenuItem>
-            
+              <MenuItem value="ART_AND_DESIGN">ART_AND_DESIGN</MenuItem>
+              <MenuItem value="AUTO_AND_VEHICLES">AUTO_AND_VEHICLES</MenuItem>
+              <MenuItem value="BEAUTY">BEAUTY</MenuItem>
+              <MenuItem value="BOOKS_AND_REFERENCE">
+                BOOKS_AND_REFERENCE
+              </MenuItem>
+              <MenuItem value="BUSINESS">BUSINESS</MenuItem>
+              <MenuItem value="COMICS">COMICS</MenuItem>
+              <MenuItem value="COMMUNICATION">COMMUNICATION</MenuItem>
+              <MenuItem value="DATING">DATING</MenuItem>
+              <MenuItem value="EDUCATION">EDUCATION</MenuItem>
+              <MenuItem value="ENTERTAINMENT">ENTERTAINMENT</MenuItem>
+              <MenuItem value="EVENTS">EVENTS</MenuItem>
+              <MenuItem value="FAMILY">FAMILY</MenuItem>
+              <MenuItem value="FINANCE">FINANCE</MenuItem>
+              <MenuItem value="GAME">GAME</MenuItem>
+              <MenuItem value="FOOD_AND_DRINK">FOOD_AND_DRINK</MenuItem>
+              <MenuItem value="HEALTH_AND_FITNESS">HEALTH_AND_FITNESS</MenuItem>
+              <MenuItem value="HOUSE_AND_HOME">HOUSE_AND_HOME</MenuItem>
+              <MenuItem value="LIBRARIES_AND_DEMO">LIBRARIES_AND_DEMO</MenuItem>
+              <MenuItem value="LIFESTYLE">LIFESTYLE</MenuItem>
+              <MenuItem value="MAPS_AND_NAVIGATION">
+                MAPS_AND_NAVIGATION
+              </MenuItem>
+              <MenuItem value="MEDICAL">MEDICAL</MenuItem>
+
+              <MenuItem value="NEWS_AND_MAGAZINES">NEWS_AND_MAGAZINES</MenuItem>
+              <MenuItem value="PARENTING">PARENTING</MenuItem>
+              <MenuItem value="PERSONALIZATION">PERSONALIZATION</MenuItem>
+              <MenuItem value="PHOTOGRAPHY">PHOTOGRAPHY</MenuItem>
+              <MenuItem value="PRODUCTIVITY">PRODUCTIVITY</MenuItem>
+              <MenuItem value="SHOPPING">SHOPPING</MenuItem>
+              <MenuItem value="SOCIAL">SOCIAL</MenuItem>
+              <MenuItem value="SPORTS">SPORTS</MenuItem>
+              <MenuItem value="TOOLS">TOOLS</MenuItem>
+              <MenuItem value="TRAVEL_AND_LOCAL">TRAVEL_AND_LOCAL</MenuItem>
+              <MenuItem value="VIDEO_PLAYERS">VIDEO_PLAYERS</MenuItem>
+              <MenuItem value="WEATHER">WEATHER</MenuItem>
             </TextField>
 
             <Typography sx={{ fontSize: "15px", fontWeight: 600, mt: 2 }}>
-              Content Rating
+              Content Ratings
             </Typography>
             <FormControl component="fieldset">
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={contentRatings.Unrated}
-                    onChange={handleContentRatingChange}
-                    name="Unrated"
-                  />
-                }
-                label="Unrated"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={contentRatings.Everyone}
-                    onChange={handleContentRatingChange}
-                    name="Everyone"
-                  />
-                }
-                label="Everyone"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={contentRatings.Teen}
-                    onChange={handleContentRatingChange}
-                    name="Teen"
-                  />
-                }
-                label="Teen"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={contentRatings.Mature}
-                    onChange={handleContentRatingChange}
-                    name="Mature"
-                  />
-                }
-                label="Mature"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={contentRatings.AdultsOnly}
-                    onChange={handleContentRatingChange}
-                    name="AdultsOnly"
-                  />
-                }
-                label="Adults Only"
-              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  flexWrap: "wrap",
+                }}
+              >
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={contentRatings.Unrated}
+                      onChange={handleContentRatingChange}
+                      name="Unrated"
+                    />
+                  }
+                  label="Unrated"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={contentRatings.Teen}
+                      onChange={handleContentRatingChange}
+                      name="Teen"
+                    />
+                  }
+                  label="Teen"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={contentRatings.Mature}
+                      onChange={handleContentRatingChange}
+                      name="Mature"
+                    />
+                  }
+                  label="Mature"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={contentRatings.Everyone}
+                      onChange={handleContentRatingChange}
+                      name="Everyone"
+                    />
+                  }
+                  label="Everyone"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={contentRatings.AdultsOnly}
+                      onChange={handleContentRatingChange}
+                      name="AdultsOnly"
+                    />
+                  }
+                  label="Adults Only"
+                />
+              </Box>
             </FormControl>
 
             <Typography sx={{ fontSize: "15px", fontWeight: 600, mt: 2 }}>
-              Application Release Date
+              Release Date
             </Typography>
             <TextField
-              type="month"
+              variant="outlined"
               value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
-              variant="outlined"
+              type="month"
               sx={{
                 border: 0,
                 backgroundColor: "#F9F9F9",
@@ -384,32 +417,45 @@ handleClose();
               }}
             />
           </>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 2,
+              mt: 4,
+            }}
+          >
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+              color="primary"
+              sx={{
+                width: "120px",
+                height: "50px",
+                fontSize: "15px",
+                fontWeight: 600,
+                textTransform: "none",
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmit}
+              variant="contained"
+              color="primary"
+              sx={{
+                width: "120px",
+                height: "50px",
+                fontSize: "15px",
+                fontWeight: 600,
+                textTransform: "none",
+              }}
+            >
+              Submit
+            </Button>
+          </Box>
         </Box>
       </DialogContent>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          mt: 2,
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          sx={{ mx: 1 }}
-        >
-          Generate Now
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={handleClose}
-          sx={{ mx: 1 }}
-        >
-          Cancel
-        </Button>
-      </Box>
     </Dialog>
   );
 };
