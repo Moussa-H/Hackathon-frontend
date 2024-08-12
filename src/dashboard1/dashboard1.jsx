@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TablePagination } from '@mui/material';
-import NavBar from '../component/Navbar/NavBar';
+import NavbarDashboard from '../component/NavbarDashboard';
 
 
 const Dash = () => {
@@ -12,7 +12,12 @@ const Dash = () => {
     const fetchApps = async () => {
         const url = `http://localhost:4000/appData/`;
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'content-type': 'application/json'
+                }
+            });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -42,34 +47,34 @@ const Dash = () => {
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <NavBar />
-            <Typography variant="h6" sx={{ p: 4 }}>All applications</Typography>
+        <Paper sx={{ width: 1980, overflow: 'hidden', padding:4}}>
+            <NavbarDashboard />
+            <Typography variant="h6" sx={{ p: 4, fontWeight: 'bold', textAlign: 'center', fontSize: 32 }}>All Applications</Typography>
             <TableContainer sx={{ minHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Application Name</TableCell>
-                            <TableCell align="right">Category</TableCell>
-                            <TableCell align="right">Installs Number</TableCell>
-                            <TableCell align="right">Rating</TableCell>
-                            <TableCell align="right">Reviews</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', fontSize: 18, backgroundColor: '#9A97FF'}}>Application Name</TableCell>
+                            <TableCell sx= {{ fontWeight: 'bold', fontSize: 18, backgroundColor: '#9A97FF'}} align="center">Category</TableCell>
+                            <TableCell sx= {{ fontWeight: 'bold', fontSize: 18, backgroundColor: '#9A97FF'}} align="center">Installs Number</TableCell>
+                            <TableCell sx= {{ fontWeight: 'bold', fontSize: 18, backgroundColor: '#9A97FF'}} align="center">Rating</TableCell>
+                            <TableCell sx= {{ fontWeight: 'bold', fontSize: 18, backgroundColor: '#9A97FF'}} align="center">Reviews</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {apps.map((app) => (
                             <TableRow key={app._id}>
-                                <TableCell component="th" scope="row">{app.app}</TableCell>
-                                <TableCell align="right">{app.category}</TableCell>
-                                <TableCell align="right">{app.installs}</TableCell>
-                                <TableCell align="right">{app.rating}</TableCell>
-                                <TableCell align="right">{app.reviews}</TableCell>
+                                <TableCell sx={{ fontWeight: 'bold', borderColor: '#9A97FF' }} component="th" scope="row">{app.app}</TableCell>
+                                <TableCell sx={{ borderColor: '#9A97FF' }} align="center">{app.category}</TableCell>
+                                <TableCell sx={{ borderColor: '#9A97FF' }} align="center">{app.installs}</TableCell>
+                                <TableCell sx={{ borderColor: '#9A97FF' }} align="center">{app.rating}</TableCell>
+                                <TableCell sx={{ borderColor: '#9A97FF' }} align="center">{app.reviews}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
+            <TablePagination sx={{ display: 'flex', justifyContent: 'center' , color: '#605BFF'}}
                 rowsPerPageOptions={[10, 25, 50]}
                 component="div"
                 count={allApps.length} 
