@@ -34,7 +34,7 @@ function Register() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/users/register",
+        "http://127.0.0.1:4000/users/register",
         {
           fname: formData.fullName,
           email: formData.email,
