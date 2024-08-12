@@ -326,14 +326,6 @@ function LandingPage() {
                         ))}
                     </div>
                     <button className="nav-arrow right" onClick={handleNextClick}>❯</button>
-                <div className="trusted-by-logos">
-                    <button className="nav-arrow left" onClick={handlePrevClick}>❮</button>
-                    <div className="logo-slider">
-                        {logos.slice(currentIndex, currentIndex + 5).map((logo, index) => (
-                            <div className="logo-item" key={index}><img src={logo} alt={`Client ${index + 1}`} /></div>
-                        ))}
-                    </div>
-                    <button className="nav-arrow right" onClick={handleNextClick}>❯</button>
                 </div>
             </section>
             <ThemeProvider theme={landingPageTheme}>
@@ -354,6 +346,7 @@ function LandingPage() {
     </ThemeProvider>
         </div>
     );
+
 }
 
 export default LandingPage;
