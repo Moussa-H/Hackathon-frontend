@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TablePagination } from '@mui/material';
 import NavbarDashboard from '../component/NavbarDashboard';
-
+import Sidebar from '../component/Sidebar';
+import { Margin } from '@mui/icons-material';
 
 const Dash = () => {
     const [allApps, setAllApps] = useState([]);
@@ -47,9 +48,10 @@ const Dash = () => {
     };
 
     return (
-        <Paper sx={{ width: 1980, overflow: 'hidden', padding:4}}>
+        <Paper sx={{ width: 1750, overflow: 'hidden', padding: 1, marginLeft: 32}}>
             <NavbarDashboard />
-            <Typography variant="h6" sx={{ p: 4, fontWeight: 'bold', textAlign: 'center', fontSize: 32 }}>All Applications</Typography>
+            <Sidebar />
+            <Typography variant="h6" sx={{ p: 4, fontWeight: 'bold', textAlign: 'center', fontSize: 32}}>All Applications</Typography>
             <TableContainer sx={{ minHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
