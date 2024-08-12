@@ -1,7 +1,6 @@
-// src/pages/Dashboard.js
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "../component/Sidebar";
+import Sidebar from "../component/SideBar/index";
 import PredictionAnalysis from "../component/PredictionAnalysis";
 import CompetitorAnalysis from "../component/CompetitorAnalysis";
 import Projects from "../component/Projects";

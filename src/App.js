@@ -5,7 +5,7 @@ import "./App.css";
 import Register from "./Register";
 import Login from "./Login";
 import LandingPage from "./LandingPage/LandingPage";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/index";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./Theme/theme";
 
