@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import React, { useState } from 'react';
 import NavBar from '../component/Navbar/NavBar'; 
 import './LandingPage.css';
 import hero from '../Images/hero-logo.png';
