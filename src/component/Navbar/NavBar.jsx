@@ -40,7 +40,7 @@ function NavBar() {
         </ul>
         <div className={`auth-links ${menuOpen ? "open" : ""}`}>
           <Link to="/login">Login</Link>
-          <Link to="/signup" className="signup-btn">
+          <Link to="/register" className="signup-btn">
             Sign Up
           </Link>
         </div>

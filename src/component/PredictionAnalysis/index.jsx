@@ -1,21 +1,24 @@
-// src/components/PredictionAnalysis.js
 import React, { useState } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-} from "@mui/material";
+import { Container, Box, Typography, Button, Card, CardContent } from "@mui/material";
 import generateImg from "../../Images/generate.svg";
 import PopupGenerate from "../PopupGenerate"; // Import the PopupGenerate component
+import { useNavigate } from 'react-router-dom';
 
 const PredictionAnalysis = () => {
   const [open, setOpen] = useState(false);
+  const [responseData, setResponseData] = useState(null); // State to store the response data
+  const navigate = useNavigate();
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
     setOpen(true);
+
+    // Assuming this is where you make the API call and get the response
+    const response = await fetch('/api/getPrediction'); // Replace with your actual API call
+    const data = await response.json();
+    setResponseData(data);
+
+    // Navigate to the detail page and pass the data as state
+    navigate('/detailapppredict', { state: { data } });
   };
 
   const handleClose = () => {
@@ -84,16 +87,15 @@ const PredictionAnalysis = () => {
               color: "#ffffff",
               "&:hover": {
                 backgroundColor: "#4A49D8",
-              },
+              }
             }}
-            onClick={handleClickOpen} // Open the popup on button click
+            onClick={handleClickOpen} // Open the popup on button click and fetch data
           >
             Generate Now
           </Button>
         </CardContent>
       </Card>
-      <PopupGenerate open={open} handleClose={handleClose} />{" "}
-      {/* Render the popup */}
+      <PopupGenerate open={open} handleClose={handleClose} /> {/* Render the popup */}
     </Container>
   );
 };

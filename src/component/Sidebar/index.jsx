@@ -27,7 +27,7 @@ const Sidebar = () => {
       }}
     >
       <List>
-        <ListItem button component={Link} to="prediction-analysis">
+        <ListItem button component={Link} to="">
           <ListItemIcon>
             <img
               src={PredictionIcon}

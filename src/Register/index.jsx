@@ -33,6 +33,7 @@ function Register() {
     }
 
     try {
+      console.log(formData.fname)
       const response = await axios.post(
         "http://127.0.0.1:4000/users/register",
         {
@@ -46,7 +47,7 @@ function Register() {
       // Handle successful registration (e.g., redirect to login page or show success message)
     } catch (error) {
       console.error("There was an error registering the user!", error);
-    
+
     }
   };
 

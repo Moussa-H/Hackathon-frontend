@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import NavBar from '../component/Navbar/NavBar'; 
+import NavBar from '../component/Navbar/NavBar';
 import './LandingPage.css';
 import hero from '../Images/hero-logo.png';
 import missionImage from '../Images/mission-image.png';
 import featureImage1 from '../Images/feature1.png';
 import featureImage2 from '../Images/feature2.png';
 import featureImage3 from '../Images/feature3.png';
-import trustedLogo1 from '../Images/logo-item1.png'; 
+import trustedLogo1 from '../Images/logo-item1.png';
 import trustedLogo2 from '../Images/logo-item2.png';
 import trustedLogo3 from '../Images/logo-item3.png';
 import trustedLogo4 from '../Images/logo-item4.png';
@@ -22,7 +22,7 @@ import trustedLogo13 from '../Images/logo-item13.png';
 import trustedLogo14 from '../Images/logo-item14.png';
 import trustedLogo15 from '../Images/logo-item15.png';
 import MuiAlert from '@mui/material/Alert';
-import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails, 
+import { Card, CardContent, Typography, Button, ThemeProvider, createTheme, Box, CardMedia, Accordion, AccordionSummary, AccordionDetails,
     TextField, Container, Link, Snackbar } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useNavigate } from 'react-router-dom';
@@ -35,31 +35,31 @@ const pricingPlans = [
       { name: 'Validation', image: '/check.png' },
       { name: 'Overview', image: '/check.png' },
       { name: 'Trends', image: '/check.png' }] },
-  
+
     { id: 2, name: 'Premium', price: '70', features: [
       { name: 'Prediction', image: '/transparent.jpg' },
       { name: 'Analysis', image: '/transparent.jpg' },
       { name: 'Insights', image: '/transparent.jpg' },
       { name: 'Tracking', image: '/transparent.jpg' }] },
-  
-    { id: 3, name: 'Gold', price: '120', features: [ 
+
+    { id: 3, name: 'Gold', price: '120', features: [
       { name: 'Support', image: '/check.png' },
       { name: 'Monitoring', image: '/check.png' },
       { name: 'Strategy', image: '/check.png' }] }
   ];
-  
+
   const landingPageTheme = createTheme({
       typography: {
         fontFamily: 'poppins',
       }
   });
-  
+
   const theme = createTheme({
       palette: {
         backgroundColor: createColor('#605BFF'),
       },
     });
-  
+
     function FAQAndContact() {
       const faqs = [
           { question: "What does AppRicot do ?", answer: "AppRicot provides analytics tools for app developers." },
@@ -76,7 +76,7 @@ const pricingPlans = [
               <Typography variant="h4" sx={{ mb: 5, fontSize: 32, textAlign: 'center'}}>Frequently Asked Questions</Typography>
                   <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                   {faqs.map((faq, index) => (
-                      <Accordion key={index} sx={{ width: '48%', mb: 3, backgroundColor: '#ffffff', boxShadow: 'none', border: '1px solid #605BFF', borderRadius: '20px', 
+                      <Accordion key={index} sx={{ width: '48%', mb: 3, backgroundColor: '#ffffff', boxShadow: 'none', border: '1px solid #605BFF', borderRadius: '20px',
                       '&:before': { display: 'none' } }}>
                           <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 56 }}>
                               <Typography sx={{ fontWeight: 'medium', fontSize: 16 }}>{faq.question}</Typography>
@@ -90,7 +90,7 @@ const pricingPlans = [
           </Container>
         );
       }
-      
+
   const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -102,7 +102,7 @@ const pricingPlans = [
           message: ''
         });
         const [openSnackbar, setOpenSnackbar] = useState(false);
-      
+
         const handleChange = (event) => {
           const { name, value } = event.target;
           console.log(name, value);
@@ -111,9 +111,9 @@ const pricingPlans = [
             [name]: value
           }));
         };
-      
+
         const handleSubmit = () => {
-          if (!formData.firstName == '' || !formData.lastName == '' || !formData.email == '' || !formData.message == '' && formData.email.includes('@')) {
+          if (formData.firstName !== '' || formData.lastName !== '' || formData.email !== '' || formData.message !== '' && formData.email.includes('@')) {
               console.log(formData);
               setOpenSnackbar(true);
               setFormData({
@@ -124,7 +124,7 @@ const pricingPlans = [
               });
           };
         };
-      
+
         const handleCloseSnackbar =(reason) => {
           if (reason === 'clickaway') {
             return;
@@ -140,19 +140,19 @@ const pricingPlans = [
               </Typography>
               </Box>
               <Box component="form" sx={{width: 600, display: 'flex', flexDirection: 'column', gap: 1, marginLeft: '180px', padding: '20px'}}>
-                  <TextField fullWidth label="First Name" name='firstName' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'}}} placeholder="John" 
+                  <TextField fullWidth label="First Name" name='firstName' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'}}} placeholder="John"
                   InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
                       padding: '0px 0px 4px 18px'}}} value={formData.firstName} onChange={handleChange}/>
-                  <TextField fullWidth  label="Last Name" name ='lastName' variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="Doe" 
+                  <TextField fullWidth  label="Last Name" name ='lastName' variant="outlined" sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="Doe"
                   InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/User.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
                       padding: '0px 0px 4px 18px' }}} value={formData.lastName} onChange={handleChange}/>
-                  <TextField fullWidth label="Email" name='email' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="john@email.com" 
+                  <TextField fullWidth label="Email" name='email' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} placeholder="john@email.com"
                   InputProps={{ style: { backgroundColor: 'white', backgroundImage: 'url("/email.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px center',
                       padding: '0px 0px 4px 18px' }}} value={formData.email} onChange={handleChange}/>
-                  <TextField fullWidth label="Message" multiline rows={4} name='message' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }} 
-                  placeholder="type your message here ...." InputProps={{ style: { backgroundColor: 'white', fontSize: '13px', fontStyle: 'italic', backgroundImage: 'url("/message.png")', 
+                  <TextField fullWidth label="Message" multiline rows={4} name='message' sx={{ mb: 2 }} InputLabelProps={{ shrink: true, style: {margin: '-10px', fontWeight: 'bold'} }}
+                  placeholder="type your message here ...." InputProps={{ style: { backgroundColor: 'white', fontSize: '13px', fontStyle: 'italic', backgroundImage: 'url("/message.png")',
                       backgroundRepeat: 'no-repeat', backgroundPosition: 'right 400px top 23px',padding: '20px 20px 20px 32px' }}} value={formData.message} onChange={handleChange}/>
-                  <Button variant="contained" theme={theme} color= 'backgroundColor' sx={{ mt: 1, borderRadius: '10px',  height: 40, width: 240, 
+                  <Button variant="contained" theme={theme} color= 'backgroundColor' sx={{ mt: 1, borderRadius: '10px',  height: 40, width: 240,
                       textTransform: 'none', alignSelf: 'center'}} onClick={() => handleSubmit()}>Send</Button>
                   <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} >
                   <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>Message delivered successfully!</Alert>
@@ -162,21 +162,21 @@ const pricingPlans = [
           </Container>
       );
   }
-  
-  
+
+
   function PricingCard({ plan, isActive, onMouseEnter, onMouseLeave }) {
     return (
-      <Card id="pricing-section" className="pricing-card" sx={{ width: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px', 
-          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',marginLeft: '5px', marginTop: '30px', 
+      <Card id="pricing-section" className="pricing-card" sx={{ width: 390, minHeight: 574, textAlign: 'center', borderRadius: '10px', padding: '5px', gap: '5px',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',marginLeft: '5px', marginTop: '30px',
           transform: isActive ? 'scale(1.15)' : 'scale(1)', zIndex: isActive ? 1 : 0}}
       onMouseEnter={() => onMouseEnter(plan.id)}
       onMouseLeave={onMouseLeave}>
-          
+
           {plan.name === "Premium" && (
           <CardMedia
             component="img"
-            sx={{ width: 50, height: 50, marginLeft: 38 }} 
-            image="/premium.png" 
+            sx={{ width: 50, height: 50, marginLeft: 38 }}
+            image="/premium.png"
           />
         )}
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}></Box>
@@ -189,20 +189,20 @@ const pricingPlans = [
                    {feature.image && (
                       <CardMedia
                       component="img"
-                      sx={{ width: 20, height: 20, marginLeft: 13, marginTop: 1.5 }}  
+                      sx={{ width: 20, height: 20, marginLeft: 13, marginTop: 1.5 }}
                       image={feature.image}
                       />
                 )}
                   <Typography variant="body2" fontSize={18} marginTop={1}>{feature.name}</Typography></li>
             ))}
           </ul>
-          <Button theme={theme} color = 'backgroundColor' variant="contained" sx={{ textTransform: 'none', marginTop: '30px', 
+          <Button theme={theme} color = 'backgroundColor' variant="contained" sx={{ textTransform: 'none', marginTop: '30px',
               width: '50%', borderRadius: '13px', height: '50px', fontSize: '16px','&:hover': { backgroundColor: '#9A97FF'} }}>Buy Now</Button>
         </CardContent>
       </Card>
     );
   }
-  
+
   function Footer() {
       const navigate=useNavigate();
       return (
@@ -219,7 +219,7 @@ const pricingPlans = [
                   <Box sx={{ textAlign: 'center' }}>
                       <img src="/logo.png" style={{ width: 200,height: 170 }} />
                   </Box>
-                  
+
                   <Box sx={{ textAlign: 'center' }}>
                       <Typography variant="subtitle1" sx={{ fontWeight: 'bold', fontSize: 26, marginBottom: 3 }}>Connect with us</Typography>
                       <Box>
@@ -240,7 +240,7 @@ function LandingPage() {
         trustedLogo1, trustedLogo2, trustedLogo3, trustedLogo4,
         trustedLogo5, trustedLogo6, trustedLogo7, trustedLogo8,
         trustedLogo9, trustedLogo10, trustedLogo11, trustedLogo12,
-        trustedLogo13, trustedLogo14, trustedLogo15, 
+        trustedLogo13, trustedLogo14, trustedLogo15,
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -252,16 +252,16 @@ function LandingPage() {
     const handleNextClick = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % logos.length);
     };
-    const [activeCard, setActiveCard] = useState(2);  
+    const [activeCard, setActiveCard] = useState(2);
 
   const handleMouseEnter = (id) => {
     setActiveCard(id);
   };
 
   const handleMouseLeave = () => {
-    setActiveCard(2); 
+    setActiveCard(2);
   };
-    
+
     return (
         <div className="landing-page-container">
             <NavBar />
@@ -274,8 +274,8 @@ function LandingPage() {
                 </div>
                 <div className="hero-content">
                     <p>
-                        At App Ricot, we help startups and developers turn their app ideas into 
-                        successful, market-ready products by offering AI-driven insights and 
+                        At App Ricot, we help startups and developers turn their app ideas into
+                        successful, market-ready products by offering AI-driven insights and
                         comprehensive tools for validation and competitive analysis.
                     </p>
                 </div>

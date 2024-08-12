@@ -6,6 +6,7 @@ import CompetitorAnalysis from "../component/CompetitorAnalysis";
 import Projects from "../component/Projects";
 import NavbarDashboard from "../component/NavbarDashboard";
 import { Box, Container } from "@mui/material";
+import DetailAppPredict from "../component/DetailAppPredict";
 
 const Dashboard = () => {
   return (
@@ -32,6 +33,7 @@ const Dashboard = () => {
               element={<CompetitorAnalysis />}
             />
             <Route path="my-project" element={<Projects />} />
+            <Route path="detailapppredict" element={<DetailAppPredict />} />
           </Routes>
         </Container>
       </Box>

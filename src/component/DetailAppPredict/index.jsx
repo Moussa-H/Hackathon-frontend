@@ -27,6 +27,10 @@ const DetailAppPredict = () => {
 
   const categoryName = category.replace("_", " "); // Adjust as needed
 
+  // Rounding the predictions
+  const roundedRatingPredictions = Math.round(rating_predictions * 10) / 10; // Rounds to 1 decimal place
+  const roundedInstallsPredictions = Math.round(installs_predictions); // Rounds to the nearest integer
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>
@@ -70,9 +74,7 @@ const DetailAppPredict = () => {
             <CardContent>
               <Typography variant="h6">Expected Reviews</Typography>
               <Typography variant="body1">
-                {rating_predictions.length > 0
-                  ? `${rating_predictions[0].toFixed(1)}`
-                  : "N/A"}
+                {roundedRatingPredictions}
               </Typography>
               <StarIcon />
             </CardContent>
@@ -83,9 +85,7 @@ const DetailAppPredict = () => {
             <CardContent>
               <Typography variant="h6">Expected Installs</Typography>
               <Typography variant="body1">
-                {installs_predictions.length > 0
-                  ? `${installs_predictions[0].toFixed(1)}`
-                  : "N/A"}
+                {roundedInstallsPredictions}
               </Typography>
               <DownloadIcon />
             </CardContent>

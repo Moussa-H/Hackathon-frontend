@@ -91,7 +91,7 @@ const handleSubmit = async () => {
     console.log("Response:", response.data);
 
     // Navigate to the DetailAppPredict component with response data
-    navigate("/detailapppredict", { state: { data: response.data } });
+    navigate("detailapppredict", { state: { data: response.data } });
   } catch (error) {
     console.error(
       "Error response:",
